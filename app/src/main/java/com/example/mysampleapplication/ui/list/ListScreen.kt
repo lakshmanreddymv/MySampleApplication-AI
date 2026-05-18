@@ -320,7 +320,9 @@ internal fun categoryLabel(title: String): String {
         "yoga" in t || "pilates" in t || "running" in t || "workout" in t                  -> "Fitness"
         "sushi" in t || "burger" in t || "pasta" in t || "taco" in t || "ramen" in t ||
         "salad" in t || "cake" in t || "pizza" in t || "rice" in t || "bread" in t ||
-        "noodle" in t || "croissant" in t || "fries" in t                                  -> "Food"
+        "noodle" in t || "croissant" in t || "fries" in t || "pad" in t || "thai" in t ||
+        "curry" in t || "stew" in t || "soup" in t || "wrap" in t || "bowl" in t ||
+        "toast" in t || "waffle" in t || "pancake" in t                                    -> "Food"
         "iphone" in t || "samsung" in t || "macbook" in t || "sony" in t || "google" in t ||
         "pixel" in t || "ipad" in t || "galaxy" in t || "laptop" in t || "phone" in t ||
         "headphone" in t || "watch" in t || "camera" in t ||
