@@ -7,7 +7,7 @@
 ![Tests](https://img.shields.io/badge/Tests-38%20passing-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
-> Search 90 catalogue items using plain English. Powered by Gemini 2.5 Flash — no keyword matching, just intent.
+> Search 90 catalogue items using plain English. Powered by Gemini 2.5 Flash — no keyword matching, just intent. Material 3 UI with semantic category badges, shimmer skeleton loading, animated pill search bar, and full light/dark theme support.
 
 ---
 
@@ -30,7 +30,7 @@
 
 Traditional list screens force users to scroll or rely on exact keyword matches. A user searching for *"something to eat in Italy"* gets nothing from a `contains()` filter on "Pizza Margherita" or "Pasta Carbonara" — even though those are exact answers.
 
-This project solves that by routing every search through Gemini 2.0 Flash, which understands intent and returns semantically matching results. It is **Project 1 of 4** in an AI-powered Android portfolio, establishing the foundational architecture pattern used across all four projects.
+This project solves that by routing every search through Gemini 2.5 Flash, which understands intent and returns semantically matching results. It is **Project 1 of 4** in an AI-powered Android portfolio, establishing the foundational architecture pattern used across all four projects.
 
 ---
 
@@ -38,12 +38,16 @@ This project solves that by routing every search through Gemini 2.0 Flash, which
 
 | Feature | Description |
 |---------|-------------|
-| Natural language search | Type anything — "Japanese street food", "something for cardio", "European capital" — and get matching results |
-| Gemini 2.0 Flash integration | Real-time AI search via the Gemini v1beta REST API using OkHttp |
-| AI-generated item detail | Tap any item to get a 2–3 sentence AI-written description |
-| Loading overlay | Semi-transparent overlay with spinner and status label during AI calls |
-| Error handling & retry | Descriptive error messages with one-tap retry on both screens |
-| Clean Architecture + MVVM + UDF | Domain/data/UI layers with sealed state classes and StateFlow |
+| Natural language search | Type anything — "Japanese street food", "something for cardio", "European capital" — Gemini 2.5 Flash returns matching results |
+| AI-generated item detail | Tap any item for a 2–3 sentence description written by the model on demand |
+| Semantic category badges | Each card shows a keyword-derived label: Food, Tech, Biology, AI, Space, Health, Wellness, Fitness, Science |
+| Material 3 design | Blue-indigo primary, teal secondary accent bar, full light and dark theme via `MaterialTheme.colorScheme` tokens |
+| Shimmer skeleton loading | 5 pulsing placeholder cards during API calls — no third-party library, pure Compose animation |
+| Animated pill search bar | Shadow elevation animates 2 dp → 6 dp on focus; disabled during in-flight requests |
+| Empty and error states | Distinct UI for zero results and network failures, each with a one-tap retry |
+| 28 Compose `@Preview` functions | Light + dark variants for every composable — no device needed to review UI changes |
+| 38 unit tests | 6 test classes covering use cases, ViewModels, repository, and HTTP layer via MockWebServer |
+| Clean Architecture + MVVM + UDF | Domain/data/UI layers with sealed state classes and StateFlow; domain layer has zero Android imports |
 
 ---
 
@@ -55,7 +59,7 @@ flowchart TD
     B --> C[SearchItemsUseCase.invoke]
     C --> D[ItemRepositoryImpl.searchItems]
     D --> E[Build prompt with full 90-item catalogue]
-    E --> F[GeminiApiImpl — POST v1beta/gemini-2.0-flash]
+    E --> F[GeminiApiImpl — POST v1beta/gemini-2.5-flash]
     F --> G{API Response}
     G -->|Success| H[Parse JSON array of matching IDs]
     G -->|Error| I[Throw exception with message]
@@ -125,13 +129,13 @@ graph TD
 | Layer | Technology | Version |
 |-------|-----------|---------|
 | Language | Kotlin | 2.0.21 |
-| UI | Jetpack Compose + Material3 | BOM 2024.09 |
-| Architecture | MVVM + Clean Architecture + UDF | — |
-| AI | Gemini 2.0 Flash REST API | v1beta |
+| UI | Jetpack Compose + Material 3 | BOM 2024.09 |
+| Architecture | Clean Architecture · MVVM · UDF · StateFlow | — |
+| AI | Gemini 2.5 Flash REST API | v1beta |
 | Networking | OkHttp | 4.12.0 |
 | Async | Kotlin Coroutines + StateFlow | — |
 | Navigation | Navigation Compose | 2.8.9 |
-| Testing | JUnit 4 + MockK + Coroutines Test | — |
+| Testing | JUnit 4 · MockK · MockWebServer · Coroutines Test · JaCoCo | — |
 | CI | GitHub Actions | — |
 | Min SDK | Android 7.0 (API 24) | — |
 | Target SDK | Android 15 (API 36) | — |
@@ -197,7 +201,7 @@ echo "gemini.api.key=YOUR_API_KEY_HERE" >> local.properties
 
 | # | Project | AI Technology | Tests | Highlights |
 |---|---------|--------------|-------|------------|
-| 1 | [MySampleApplication-AI](https://github.com/lakshmanreddymv-bot/MySampleApplication-AI) | Gemini 2.0 Flash (REST) | 38 | Natural language search, Clean Architecture foundation |
+| 1 | [MySampleApplication-AI](https://github.com/lakshmanreddymv-bot/MySampleApplication-AI) | Gemini 2.5 Flash (REST) | 38 | Natural language search, Material 3 UI, Clean Architecture foundation |
 | 2 | [FakeProductDetector](https://github.com/lakshmanreddymv-bot/FakeProductDetector) | Gemini Vision + Claude API | 46 | Image analysis, multi-model AI, barcode scanning |
 | 3 | [EnterpriseDocumentRedactor](https://github.com/lakshmanreddymv-bot/EnterpriseDocumentRedactor) | ML Kit on-device | 0 API cost | Zero-cost PII redaction, fully on-device inference |
 | 4 | [MedicalSymptomPreScreener](https://github.com/lakshmanreddymv-bot/MedicalSymptomPreScreener) | Gemini + safety layers | 67 | 3-layer safety, medical disclaimer, CI badge |
