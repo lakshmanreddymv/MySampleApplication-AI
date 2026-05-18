@@ -310,14 +310,22 @@ internal fun ItemList(
  */
 internal fun categoryLabel(title: String): String {
     val t = title.lowercase()
+    val words = title.split(" ")
     return when {
-        "dna" in t || "gene" in t         -> "Biology"
-        "ai" in t || "neural" in t        -> "AI"
-        "space" in t || "mars" in t       -> "Space"
-        "diet" in t || "health" in t      -> "Health"
-        "meditation" in t || "sleep" in t -> "Wellness"
-        "computing" in t || "code" in t   -> "Tech"
-        else                               -> "Science"
+        "dna" in t || "gene" in t                                                           -> "Biology"
+        words.any { it == "AI" } || "neural" in t                                           -> "AI"
+        "space" in t || "mars" in t                                                         -> "Space"
+        "diet" in t || "health" in t                                                        -> "Health"
+        "meditation" in t || "sleep" in t                                                   -> "Wellness"
+        "yoga" in t || "pilates" in t || "running" in t || "workout" in t                  -> "Fitness"
+        "sushi" in t || "burger" in t || "pasta" in t || "taco" in t || "ramen" in t ||
+        "salad" in t || "cake" in t || "pizza" in t || "rice" in t || "bread" in t ||
+        "noodle" in t || "croissant" in t || "fries" in t                                  -> "Food"
+        "iphone" in t || "samsung" in t || "macbook" in t || "sony" in t || "google" in t ||
+        "pixel" in t || "ipad" in t || "galaxy" in t || "laptop" in t || "phone" in t ||
+        "headphone" in t || "watch" in t || "camera" in t ||
+        "computing" in t || "code" in t                                                     -> "Tech"
+        else                                                                                 -> "Science"
     }
 }
 
